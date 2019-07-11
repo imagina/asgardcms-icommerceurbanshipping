@@ -43,13 +43,16 @@ class IcommerceUrbanshippingApiController extends BaseApiController
     public function init(Request $request){
 
       try {
-          $data = $request->all();
+         
             // Configuration
             $shippingName = config('asgard.icommerceurbanshipping.config.shippingName');
             $attribute = array('name' => $shippingName);
             $shippingMethod = $this->shippingMethod->findByAttributes($attribute);
+
+            $data = $request->all();
       
             $areaMap = $this->mapArea->findByAttributes(["name" => $data["options"]->shipping_method  ?? ""]);
+  
             $response = $this->icommerceurban->calculate($data,$shippingMethod->options,$areaMap);
 
           } catch (\Exception $e) {

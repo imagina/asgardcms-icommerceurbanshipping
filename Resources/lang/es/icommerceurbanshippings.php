@@ -20,8 +20,8 @@ return [
     'form' => [
     ],
     'messages' => [
-        'msjini' => 'No se ha recibido el shipping value',
-        //'msjini' => 'No disponible para la zona',
+        'msjini' => 'No se ha recibido el Area Map',
+        'not shipping value' => 'No se ha recibido el shipping value',
         'min' => 'El total minimo de la orden debe ser:',
     ],
     'validation' => [

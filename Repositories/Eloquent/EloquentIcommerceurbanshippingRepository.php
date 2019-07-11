@@ -12,23 +12,35 @@ class EloquentIcommerceurbanshippingRepository extends EloquentBaseRepository im
 
     function calculate($parameters,$conf, $areaMap){
 
-        $shippingValue = $areaMap->price;
-        
-        if($shippingValue!=null){
+        if($areaMap!=null){
 
-            $response["status"] = "success";
-            $response["items"] = MapAreaTransformer::collection(MapArea::all());
-            $response["price"] = $shippingValue;
-            $response["priceshow"] = false;
+            $shippingValue = $areaMap->price;
+        
+            if($shippingValue!=null){
+
+                $response["status"] = "success";
+                $response["items"] = MapAreaTransformer::collection(MapArea::all());
+                $response["price"] = $shippingValue;
+                $response["priceshow"] = false;
+
+            }else{
+                
+                $response =[
+                    'status' => 'error',
+                    'msj' => trans('icommerceurbanshipping::icommerceurbanshippings.messages.not shipping value')
+                ];
+
+            }
 
         }else{
-            
+
             $response =[
                 'status' => 'error',
                 'msj' => trans('icommerceurbanshipping::icommerceurbanshippings.messages.msjini')
             ];
 
         }
+        
 
         /*
         $areaMapId = isset($parameters["options"]["areaMapId"]) ? $parameters["options"]["areaMapId"] : null;
